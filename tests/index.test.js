@@ -47,3 +47,15 @@ describe('getCurrencies', () => {
         expect(result).toEqual(expect.arrayContaining(['EUR', 'USD', 'AUD']));
     })
 });
+
+describe('getProduct', () => {
+    it('should return the product with the given id', () => {
+        const result = index.getProduct(1);
+        //expect(result).toEqual({id: 1, price: 10}); //to be checks also for the address of the object. To Equal does not
+        expect(result).toMatchObject({id: 1, price: 10}); // does not need to have all properties the same
+        expect(result).toHaveProperty('id', 1);
+
+        //toEqual or toBe are making the tests on objects too specific
+    });
+});
+
