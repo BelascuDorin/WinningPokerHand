@@ -59,3 +59,23 @@ describe('getProduct', () => {
     });
 });
 
+describe('registerUser', () => {
+    it('should throw if username is falsy', () => {
+        // null
+        // undefined
+        // NaN
+        // ''
+        // 0
+        // false
+        const args = [null, undefined, NaN, '', 0, false];
+        args.forEach(a => {
+            expect(() => {index.registerUser(a)}).toThrow();
+        });
+    });
+
+    it('should return a user object if valid username is passed', () => {
+        const result = index.registerUser('Dorin');
+        expect(result).toMatchObject({username: 'Dorin'})
+        expect(result.id).toBeGreaterThan(0);
+    })
+});
