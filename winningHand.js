@@ -1,4 +1,5 @@
 const findDuplicates = require('array-find-duplicates');
+const Card = require('./Card');
 
 function thereAreDuplicatedCards(cards){
     const result = findDuplicates(cards, (a, b) => a.number === b.number && a.type === b.type);
@@ -15,37 +16,43 @@ function isAFlash_OfType(type, cards){
         }
     });
 
-    if(nrOfTypeCards === 5){
+    console.log(nrOfTypeCards);
+
+    if(nrOfTypeCards >= 5){
         return 1;
     }
 
     return 0;
 }
 
-function hasAllRoyalCards(cards){
-    if( cards.find(c => c.number === '10') &&
-        cards.find(c => c.number === 'J')  &&
-        cards.find(c => c.number === 'Q')  &&
-        cards.find(c => c.number === 'K')  &&
-        cards.find(c => c.number === 'A') 
+function cardExists(cards, card){
+    const exists = cards.find(c => 
+        (c.number === card.number && c.type === card.type)
+    );
+    return exists;
+}
+
+function hasAllRoyalCards_OfType(type, cards){
+    const TEN_OfType = Card.createCard("10", type);
+    const J_OfType = Card.createCard("J", type);
+    const Q_OfType = Card.createCard("Q", type);
+    const K_OfType = Card.createCard("K", type);
+    const A_OfType = Card.createCard("A", type);
+    if( cardExists(cards, TEN_OfType) &&
+        cardExists(cards, J_OfType)   &&
+        cardExists(cards, Q_OfType)   &&
+        cardExists(cards, K_OfType)   &&
+        cardExists(cards, A_OfType) 
       )
     {
         return 1;
     }
-}
-
-function itsA_Club_RoyalFlash(cards){
-    if(isAFlash_OfType('CLUB', cards) && hasAllRoyalCards(cards))
-        return 1;
-    else
-        return 0;
+    return 0;
 }
 
 function itsA_Club_StraightFlash(cards){
     return 1;
 }
-
-
 
 module.exports.evaluate7CardsPokerHand = function(pokerHand){
     
@@ -57,7 +64,9 @@ module.exports.evaluate7CardsPokerHand = function(pokerHand){
         throw new Error('Invalid Hand. There are at least 2 duplicated cards.');
     }
 
-    if(itsA_Club_RoyalFlash(pokerHand.cards)){
+    if( hasAllRoyalCards_OfType("CLUB", pokerHand.cards)    ||
+        hasAllRoyalCards_OfType("DIAMOND", pokerHand.cards)
+      ){
         return 0;
     }
 

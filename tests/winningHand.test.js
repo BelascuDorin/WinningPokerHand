@@ -27,19 +27,29 @@ describe('evaluateHandOfCards', () => { // Group the tests together
             winningHand.evaluate7CardsPokerHand(duplicateCardInHand)
         }).toThrow();
     });
+});
 
+describe('Royal Flash', () => { 
     it('should evaluate correctly CLUB Royal Flush', () => {
-        const e = winningHand.evaluate7CardsPokerHand(hg.getCLUB_RoyalFlash_Hand());
+        const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("CLUB"));
         expect(e).toBe(0);
     });
 
-    it('should evaluate 5 CLUB NOT Royal FLash cards as NOT a CLUB Royal Flush', () => {
+    it('should CLUB Flash Hand (missing royal cards) as NOT a ROYAL FLASH', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getCLUB_Flash_Hand());
         expect(e).not.toBe(0);
     });
 
+    it('should evaluate correctly DIAMOND Royal Flush', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("DIAMOND"));
+        expect(e).toBe(0);
+    });
+});
+
+
+describe('Straight Flash', () => { 
     // it('should evaluate correctly CLUB straight FLash', () => {
-    //     const e = winningHand.evaluate7CardsPokerHand(getCLUB_RoyalFlash_Hand());
+    //     const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType());
     //     expect(e).toBe(1);
     // });
 });

@@ -14,16 +14,16 @@ module.exports.getValid_HandOfCards =  function getValid_HandOfCards() {
     };
 }
 
-module.exports.getCLUB_RoyalFlash_Hand = function getCLUB_RoyalFlash_Hand(){
+module.exports.getRoyalFlash_Hand_OfType = function getRoyalFlash_Hand_OfType(type){
     return {
         cards: [
-            Card.createCard("10", "CLUB"),
-            Card.createCard("3", "HEART"),
-            Card.createCard("Q", "CLUB"),
-            Card.createCard("A", "CLUB"),
-            Card.createCard("J", "CLUB"),
-            Card.createCard("K", "CLUB"),
+            Card.createCard("10", type),
+            Card.createCard("3", "DIAMOND"),
+            Card.createCard("Q", type),
+            Card.createCard("A", type),
+            Card.createCard("J", type),
             Card.createCard("K", "SPADE"),
+            Card.createCard("K", type),
         ]
     };
 }
