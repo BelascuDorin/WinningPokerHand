@@ -15,9 +15,6 @@ function isAFlash_OfType(type, cards){
             nrOfTypeCards++;
         }
     });
-
-    console.log(nrOfTypeCards);
-
     if(nrOfTypeCards >= 5){
         return 1;
     }
@@ -34,10 +31,10 @@ function cardExists(cards, card){
 
 function hasAllRoyalCards_OfType(type, cards){
     const TEN_OfType = Card.createCard("10", type);
-    const J_OfType = Card.createCard("J", type);
-    const Q_OfType = Card.createCard("Q", type);
-    const K_OfType = Card.createCard("K", type);
-    const A_OfType = Card.createCard("A", type);
+    const J_OfType   = Card.createCard("J", type);
+    const Q_OfType   = Card.createCard("Q", type);
+    const K_OfType   = Card.createCard("K", type);
+    const A_OfType   = Card.createCard("A", type);
     if( cardExists(cards, TEN_OfType) &&
         cardExists(cards, J_OfType)   &&
         cardExists(cards, Q_OfType)   &&
@@ -65,7 +62,9 @@ module.exports.evaluate7CardsPokerHand = function(pokerHand){
     }
 
     if( hasAllRoyalCards_OfType("CLUB", pokerHand.cards)    ||
-        hasAllRoyalCards_OfType("DIAMOND", pokerHand.cards)
+        hasAllRoyalCards_OfType("DIAMOND", pokerHand.cards) ||
+        hasAllRoyalCards_OfType("SPADE", pokerHand.cards)   ||
+        hasAllRoyalCards_OfType("HEART", pokerHand.cards) 
       ){
         return 0;
     }

@@ -44,6 +44,18 @@ describe('Royal Flash', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("DIAMOND"));
         expect(e).toBe(0);
     });
+
+
+    it('should evaluate correctly SPADE Royal Flush', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("SPADE"));
+        expect(e).toBe(0);
+    });
+
+    it('should evaluate correctly HEART Royal Flush', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("HEART"));
+        expect(e).toBe(0);
+    });
+
 });
 
 
