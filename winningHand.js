@@ -7,7 +7,8 @@ function thereAreDuplicatedCards(cards){
 }
 
 module.exports.evaluate7CardsPokerHand = function(pokerHand){
-    if(pokerHand.nrOfCards !== 7 ){
+    console.log(pokerHand.cards.length);
+    if(pokerHand.cards.length !== 7 ){
         throw new Error('The poker hand should have only 7 cards.');
     }
 

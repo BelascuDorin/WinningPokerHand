@@ -1,36 +1,32 @@
-const Enum = require('enum')
-
 const winningHand = require('../winningHand');
-const CardTypes = new Enum(['CLUB', 'DIAMOND', 'SPADE', 'HEART']);
-const CardNumbers = new Enum(['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']);
+const Card = require('../Card');
+
 
 describe('evaluateHandOfCards', () => { // Group the tests together 
     function getValidHandOfCards() {
         return {
-            nrOfCards: 7,
             cards: [
-                { "number": CardNumbers.get('2').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('3').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('4').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('A').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('2').value, "type": CardTypes.get('SPADE').value },
-                { "number": CardNumbers.get('4').value, "type": CardTypes.get('DIAMOND').value },
-                { "number": CardNumbers.get('3').value, "type": CardTypes.get('HEART').value },
+                Card.createCard("K", "CLUB"),
+                Card.createCard("2", "HEART"),
+                Card.createCard("3", "CLUB"),
+                Card.createCard("4", "CLUB"),
+                Card.createCard("A", "DIAMOND"),
+                Card.createCard("2", "SPADE"),
+                Card.createCard("4", "SPADE"),
             ]
         };
     }
 
     function getCLUBRoyalFlashHand(){
         return {
-            nrOfCards: 7,
             cards: [
-                { "number": CardNumbers.get('10').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('3').value, "type": CardTypes.get('SPADE').value },
-                { "number": CardNumbers.get('Q').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('A').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('J').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('K').value, "type": CardTypes.get('CLUB').value },
-                { "number": CardNumbers.get('K').value, "type": CardTypes.get('DIAMOND').value },
+                Card.createCard("10", "CLUB"),
+                Card.createCard("3", "HEART"),
+                Card.createCard("Q", "CLUB"),
+                Card.createCard("A", "CLUB"),
+                Card.createCard("J", "CLUB"),
+                Card.createCard("K", "CLUB"),
+                Card.createCard("K", "SPADE"),
             ]
         };
     }
@@ -41,7 +37,7 @@ describe('evaluateHandOfCards', () => { // Group the tests together
         }).not.toThrow();
 
         h8 = getValidHandOfCards();
-        h8.nrOfCards = 8;
+        h8.cards.push(Card.createCard("10", "CLUB"));
         expect(() => {
             winningHand.evaluate7CardsPokerHand(h8)
         }).toThrow();
