@@ -22,7 +22,7 @@ module.exports.getRoyalFlash_Hand_OfType = function getRoyalFlash_Hand_OfType(ty
             Card.createCard("Q", type),
             Card.createCard("A", type),
             Card.createCard("J", type),
-            Card.createCard("K", "SPADE"),
+            Card.createCard("7", "SPADE"),
             Card.createCard("K", type),
         ]
     };

@@ -55,7 +55,6 @@ describe('Royal Flash', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("HEART"));
         expect(e).toBe(0);
     });
-
 });
 
 
