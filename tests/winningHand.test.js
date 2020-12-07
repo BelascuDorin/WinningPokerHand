@@ -1,6 +1,7 @@
 const winningHand = require('../winningHand');
 const hg = require('./handsGenerator');
 const Card = require('../Card');
+const handEvaluator = require('../HandEvaluationScale');
 
 describe('evaluateHandOfCards', () => { // Group the tests together 
     it('should work only with a 7 cards hand', () => {
@@ -30,30 +31,32 @@ describe('evaluateHandOfCards', () => { // Group the tests together
 });
 
 describe('Royal Flash', () => { 
+    const ROYAL_FLASH = handEvaluator.getEvaluation("ROYAL_FLASH");
+    console.log(ROYAL_FLASH);
+
     it('should evaluate correctly CLUB Royal Flush', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("CLUB"));
-        expect(e).toBe(0);
+        expect(e).toBe(ROYAL_FLASH);
     });
 
     it('should CLUB Flash Hand (missing royal cards) as NOT a ROYAL FLASH', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getCLUB_Flash_Hand());
-        expect(e).not.toBe(0);
+        expect(e).not.toBe(ROYAL_FLASH);
     });
 
     it('should evaluate correctly DIAMOND Royal Flush', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("DIAMOND"));
-        expect(e).toBe(0);
+        expect(e).toBe(ROYAL_FLASH);
     });
-
 
     it('should evaluate correctly SPADE Royal Flush', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("SPADE"));
-        expect(e).toBe(0);
+        expect(e).toBe(ROYAL_FLASH);
     });
 
     it('should evaluate correctly HEART Royal Flush', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("HEART"));
-        expect(e).toBe(0);
+        expect(e).toBe(ROYAL_FLASH);
     });
 });
 

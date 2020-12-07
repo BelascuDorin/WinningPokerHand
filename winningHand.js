@@ -1,5 +1,6 @@
 const findDuplicates = require('array-find-duplicates');
 const Card = require('./Card');
+const handEvaluator = require('./HandEvaluationScale');
 
 function thereAreDuplicatedCards(cards){
     const result = findDuplicates(cards, (a, b) => a.number === b.number && a.type === b.type);
@@ -66,11 +67,11 @@ module.exports.evaluate7CardsPokerHand = function(pokerHand){
         hasAllRoyalCards_OfType("SPADE", pokerHand.cards)   ||
         hasAllRoyalCards_OfType("HEART", pokerHand.cards) 
       ){
-        return 0;
+        return handEvaluator.getEvaluation("ROYAL_FLASH");
     }
 
     if(itsA_Club_StraightFlash(pokerHand.cards)){
-        return 1;
+        return handEvaluator.getEvaluation("STRAIGHT_FLUSH");
     }
     
     return 100;

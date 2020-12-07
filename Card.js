@@ -1,7 +1,7 @@
 const Enum = require('enum')
 
-const CardTypes = new Enum(['CLUB', 'DIAMOND', 'SPADE', 'HEART']);
-const CardNumbers = new Enum(['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']);
+const CardTypes = new Enum(['CLUB', 'DIAMOND', 'SPADE', 'HEART'], { freeze: true });
+const CardNumbers = new Enum(['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], { freeze: true });
 
 class Card {
     constructor(number, type) {
