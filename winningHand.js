@@ -12,7 +12,7 @@ function isAFlash_OfType(type, cards){
     nrOfTypeCards = 0;
 
     cards.forEach(card => {
-        if(card.type === type){
+        if(card.type.key === type){
             nrOfTypeCards++;
         }
     });
@@ -25,7 +25,7 @@ function isAFlash_OfType(type, cards){
 
 function cardExists(cards, card){
     const exists = cards.find(c => 
-        (c.number === card.number && c.type === card.type)
+        (c.number.value === card.number.value && c.type.value === card.type.value)
     );
     return exists;
 }
@@ -48,9 +48,39 @@ function hasAllRoyalCards_OfType(type, cards){
     return 0;
 }
 
-function itsA_Club_StraightFlash(cards){
-    return 1;
+function isA_StraightFlash_OfType(type, cards){
+    const flushOnly = cards.filter(card => card.type.key === type).map(card => card.number.value);
+    if(flushOnly.length < 5) return false;
+
+    apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    flushOnly.forEach(n => apparition[n]++);
+
+    current = 0;
+    max = 0;
+    i = 0;
+    while(i < apparition.length){
+        if(apparition[i] === 1){
+            current++;
+        }
+        else{
+            if(current > max) max = current;
+        }
+        i++;
+    }
+
+    if(max >= 5){
+        return true;
+    }
+
+    return false;
 }
+
+function itsA_Club_StraightFlash(cards){
+    if(isA_StraightFlash_OfType("CLUB", cards))
+        return 1;
+    return 0;
+}
+
 
 module.exports.evaluate7CardsPokerHand = function(pokerHand){
     
@@ -61,6 +91,10 @@ module.exports.evaluate7CardsPokerHand = function(pokerHand){
     if(thereAreDuplicatedCards(pokerHand.cards) === 1){
         throw new Error('Invalid Hand. There are at least 2 duplicated cards.');
     }
+
+    orderedHand = pokerHand.cards.sort( (a, b) => {
+        return (a.number.value < b.number.value) ? -1 : 1;
+    });
 
     if( hasAllRoyalCards_OfType("CLUB", pokerHand.cards)    ||
         hasAllRoyalCards_OfType("DIAMOND", pokerHand.cards) ||

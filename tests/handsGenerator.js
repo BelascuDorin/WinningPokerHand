@@ -28,15 +28,29 @@ module.exports.getRoyalFlash_Hand_OfType = function getRoyalFlash_Hand_OfType(ty
     };
 }
 
-module.exports.getCLUB_Flash_Hand = function getCLUB_Flash_Hand(){
+module.exports.getStraightFlash_Hand_OfType = function getStraightFlash_Hand_OfType(type){
     return {
         cards: [
-            Card.createCard("10", "CLUB"),
+            Card.createCard("2", type),
+            Card.createCard("6", "DIAMOND"),
+            Card.createCard("3", type),
+            Card.createCard("4", type),
+            Card.createCard("5", type),
+            Card.createCard("7", "SPADE"),
+            Card.createCard("6", type),
+        ]
+    };
+}
+
+module.exports.getFlash_Hand_OfType = function getFlash_Hand_OfType(type){
+    return {
+        cards: [
+            Card.createCard("10", type),
             Card.createCard("3", "HEART"),
-            Card.createCard("6", "CLUB"),
-            Card.createCard("A", "CLUB"),
-            Card.createCard("5", "CLUB"),
-            Card.createCard("K", "CLUB"),
+            Card.createCard("6", type),
+            Card.createCard("A", type),
+            Card.createCard("5", type),
+            Card.createCard("K", type),
             Card.createCard("K", "SPADE"),
         ]
     };

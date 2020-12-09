@@ -32,15 +32,14 @@ describe('evaluateHandOfCards', () => { // Group the tests together
 
 describe('Royal Flash', () => { 
     const ROYAL_FLASH = handEvaluator.getEvaluation("ROYAL_FLASH");
-    console.log(ROYAL_FLASH);
-
+    
     it('should evaluate correctly CLUB Royal Flush', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType("CLUB"));
         expect(e).toBe(ROYAL_FLASH);
     });
 
     it('should CLUB Flash Hand (missing royal cards) as NOT a ROYAL FLASH', () => {
-        const e = winningHand.evaluate7CardsPokerHand(hg.getCLUB_Flash_Hand());
+        const e = winningHand.evaluate7CardsPokerHand(hg.getFlash_Hand_OfType("CLUB"));
         expect(e).not.toBe(ROYAL_FLASH);
     });
 
@@ -62,9 +61,16 @@ describe('Royal Flash', () => {
 
 
 describe('Straight Flash', () => { 
-    // it('should evaluate correctly CLUB straight FLash', () => {
-    //     const e = winningHand.evaluate7CardsPokerHand(hg.getRoyalFlash_Hand_OfType());
-    //     expect(e).toBe(1);
-    // });
+    const STRAIGHT_FLUSH = handEvaluator.getEvaluation("STRAIGHT_FLUSH");
+
+    it('should evaluate correctly CLUB straight FLash', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getStraightFlash_Hand_OfType("CLUB"));
+        expect(e).toBe(STRAIGHT_FLUSH);
+    });
+
+    it('should NOT evaluate CLUB_FLUSH (NOT straight) as CLUB_STRAIGHT_FLASH', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getFlash_Hand_OfType("CLUB"));
+        expect(e).not.toBe(STRAIGHT_FLUSH);
+    });
 });
 
