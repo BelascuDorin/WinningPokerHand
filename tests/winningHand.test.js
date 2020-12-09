@@ -68,9 +68,29 @@ describe('Straight Flash', () => {
         expect(e).toBe(STRAIGHT_FLUSH);
     });
 
+    it('should evaluate correctly A2345 straight FLash', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_A2345_StraightFlash_Hand_OfType("CLUB"));
+        expect(e).toBe(STRAIGHT_FLUSH);
+    });
+
     it('should NOT evaluate CLUB_FLUSH (NOT straight) as CLUB_STRAIGHT_FLASH', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.getFlash_Hand_OfType("CLUB"));
         expect(e).not.toBe(STRAIGHT_FLUSH);
+    });
+
+    it('should evaluate correctly DIAMOND straight FLash', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getStraightFlash_Hand_OfType("DIAMOND"));
+        expect(e).toBe(STRAIGHT_FLUSH);
+    });
+
+    it('should evaluate correctly SPADE straight FLash', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getStraightFlash_Hand_OfType("SPADE"));
+        expect(e).toBe(STRAIGHT_FLUSH);
+    });
+
+    it('should evaluate correctly HEARTH straight FLash', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getStraightFlash_Hand_OfType("HEART"));
+        expect(e).toBe(STRAIGHT_FLUSH);
     });
 });
 

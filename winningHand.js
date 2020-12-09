@@ -48,15 +48,26 @@ function hasAllRoyalCards_OfType(type, cards){
     return 0;
 }
 
-function isA_Straight(cards){
-    apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    cards.forEach(n => apparition[n]++);
+function isA_A2345_Straight(apparition){
+    if(apparition[14] > 0 && 
+       apparition[2]  > 0 &&
+       apparition[3]  > 0 &&
+       apparition[4]  > 0 &&
+       apparition[5]  > 0 ) 
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
+function isA_Straight_butNot_A2345(apparition){
     current = 0;
     max = 0;
     i = 0;
     while(i < apparition.length){
-        if(apparition[i] === 1){
+        if(apparition[i] > 0){
             current++;
         }
         else{
@@ -69,6 +80,17 @@ function isA_Straight(cards){
     else return false;
 }
 
+function isA_Straight(cards){
+    apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    cards.forEach(n => apparition[n]++);
+
+    if(isA_A2345_Straight(apparition)) return true;
+    else{
+        if(isA_Straight_butNot_A2345(apparition)) return true;
+        return false;
+    }
+}
+
 function isA_StraightFlash_OfType(type, cards){
     const flushOnly = cards.filter(card => card.type.key === type).map(card => card.number.value);
     if(flushOnly.length < 5) return false;
@@ -78,8 +100,14 @@ function isA_StraightFlash_OfType(type, cards){
 }
 
 function itsA_Club_StraightFlash(cards){
-    if(isA_StraightFlash_OfType("CLUB", cards))
+    if(isA_StraightFlash_OfType("CLUB", cards)    || 
+       isA_StraightFlash_OfType("DIAMOND", cards) ||
+       isA_StraightFlash_OfType("SPADE", cards)   ||
+       isA_StraightFlash_OfType("HEART", cards))
+    {
         return 1;
+    }
+        
     return 0;
 }
 

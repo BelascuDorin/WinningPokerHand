@@ -32,7 +32,7 @@ module.exports.getStraightFlash_Hand_OfType = function getStraightFlash_Hand_OfT
     return {
         cards: [
             Card.createCard("2", type),
-            Card.createCard("6", "DIAMOND"),
+            Card.createCard("9", "DIAMOND"),
             Card.createCard("3", type),
             Card.createCard("4", type),
             Card.createCard("5", type),
@@ -51,6 +51,20 @@ module.exports.getFlash_Hand_OfType = function getFlash_Hand_OfType(type){
             Card.createCard("A", type),
             Card.createCard("5", type),
             Card.createCard("K", type),
+            Card.createCard("K", "SPADE"),
+        ]
+    };
+}
+
+module.exports.get_A2345_StraightFlash_Hand_OfType = function get_A2345_StraightFlash_Hand_OfType(type){
+    return {
+        cards: [
+            Card.createCard("2", type),
+            Card.createCard("A", type),
+            Card.createCard("4", type),
+            Card.createCard("3", type),
+            Card.createCard("5", type),
+            Card.createCard("6", "DIAMOND"),
             Card.createCard("K", "SPADE"),
         ]
     };
