@@ -48,12 +48,9 @@ function hasAllRoyalCards_OfType(type, cards){
     return 0;
 }
 
-function isA_StraightFlash_OfType(type, cards){
-    const flushOnly = cards.filter(card => card.type.key === type).map(card => card.number.value);
-    if(flushOnly.length < 5) return false;
-
+function isA_Straight(cards){
     apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    flushOnly.forEach(n => apparition[n]++);
+    cards.forEach(n => apparition[n]++);
 
     current = 0;
     max = 0;
@@ -68,11 +65,16 @@ function isA_StraightFlash_OfType(type, cards){
         i++;
     }
 
-    if(max >= 5){
-        return true;
-    }
+    if(max >= 5) return true;    
+    else return false;
+}
 
-    return false;
+function isA_StraightFlash_OfType(type, cards){
+    const flushOnly = cards.filter(card => card.type.key === type).map(card => card.number.value);
+    if(flushOnly.length < 5) return false;
+
+    if(isA_Straight(flushOnly)) return true;
+    else return false;
 }
 
 function itsA_Club_StraightFlash(cards){
