@@ -109,8 +109,38 @@ function itsA_Club_StraightFlash(cards){
     }
         
     return 0;
+};
+
+function itsA_FourOfAKind(cards){
+    cardsNumbers = cards.map(card => card.number.value);
+
+    apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    cardsNumbers.forEach(n => apparition[n]++);
+
+    is = false;
+    apparition.forEach(a => {
+        if(a === 4) is = true;
+    })
+
+    return is;
 }
 
+function itsA_FullHouse(cards){
+    cardsNumbers = cards.map(card => card.number.value);
+
+    apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    cardsNumbers.forEach(n => apparition[n]++);
+    
+    is_a_3 = false;
+    is_a_2 = false;
+    apparition.forEach(a => {
+        if(a === 3) is_a_3 = true;
+        if(a === 2) is_a_2 = true;
+    })
+
+    if(is_a_3 && is_a_2) return true;
+    else return false;
+}
 
 module.exports.evaluate7CardsPokerHand = function(pokerHand){
     
@@ -136,6 +166,14 @@ module.exports.evaluate7CardsPokerHand = function(pokerHand){
 
     if(itsA_Club_StraightFlash(pokerHand.cards)){
         return handEvaluator.getEvaluation("STRAIGHT_FLUSH");
+    }
+
+    if(itsA_FourOfAKind(pokerHand.cards)){
+        return handEvaluator.getEvaluation("FOUR_OF_A_KIND");
+    }
+
+    if(itsA_FullHouse(pokerHand.cards)){
+        return handEvaluator.getEvaluation("FULL_HOUSE");
     }
     
     return 100;

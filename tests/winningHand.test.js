@@ -59,7 +59,6 @@ describe('Royal Flash', () => {
     });
 });
 
-
 describe('Straight Flash', () => { 
     const STRAIGHT_FLUSH = handEvaluator.getEvaluation("STRAIGHT_FLUSH");
 
@@ -94,3 +93,31 @@ describe('Straight Flash', () => {
     });
 });
 
+describe('Four of a kind', () => {
+    const FOUR_OF_A_KIND = handEvaluator.getEvaluation("FOUR_OF_A_KIND");
+
+    it('should evaluate correctly 4 of 4 as FOUR_OF_A_KIND', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_FourOfAKind_OfNumber("4"));
+        expect(e).toBe(FOUR_OF_A_KIND);
+    });
+
+    it('should evaluate correctly 4 of J as FOUR_OF_A_KIND', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_FourOfAKind_OfNumber("J"));
+        expect(e).toBe(FOUR_OF_A_KIND);
+    });
+
+
+    it('should NOT evaluate correctly 3 of 10 as FOUR_OF_A_KIND', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_ThreeOfAKind_OfNumber("10"));
+        expect(e).not.toBe(FOUR_OF_A_KIND);
+    });
+});
+
+describe('Full House', () => {
+    const FULL_HOUSE = handEvaluator.getEvaluation("FULL_HOUSE");
+
+    it('should evaluate correctly a full house', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_FullHouse());
+        expect(e).toBe(FULL_HOUSE);
+    });
+});

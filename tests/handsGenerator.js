@@ -69,3 +69,47 @@ module.exports.get_A2345_StraightFlash_Hand_OfType = function get_A2345_Straight
         ]
     };
 }
+
+
+module.exports.get_FourOfAKind_OfNumber = function get_FourOfAKind_OfNumber(number){
+    return {
+        cards: [
+            Card.createCard(number, "CLUB"),
+            Card.createCard(number, "SPADE"),
+            Card.createCard("7", "DIAMOND"),
+            Card.createCard(number, "HEART"),
+            Card.createCard("5", "CLUB"),
+            Card.createCard(number, "DIAMOND"),
+            Card.createCard("K", "SPADE"),
+        ]
+    };
+}
+
+module.exports.get_ThreeOfAKind_OfNumber = function get_ThreeOfAKind_OfNumber(number){
+    return {
+        cards: [
+            Card.createCard(number, "CLUB"),
+            Card.createCard("J", "SPADE"),
+            Card.createCard("7", "DIAMOND"),
+            Card.createCard(number, "HEART"),
+            Card.createCard("5", "CLUB"),
+            Card.createCard(number, "DIAMOND"),
+            Card.createCard("K", "SPADE"),
+        ]
+    };
+}
+
+module.exports.get_FullHouse = function get_FullHouse(){
+    return {
+        cards: [
+            Card.createCard("J", "CLUB"),
+            Card.createCard("7", "DIAMOND"),
+            Card.createCard("J", "SPADE"),
+            Card.createCard("5", "CLUB"),
+            Card.createCard("2", "DIAMOND"),
+            Card.createCard("7", "HEART"),
+            Card.createCard("7", "SPADE"),
+
+        ]
+    };
+}
