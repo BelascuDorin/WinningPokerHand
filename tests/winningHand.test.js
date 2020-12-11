@@ -121,3 +121,36 @@ describe('Full House', () => {
         expect(e).toBe(FULL_HOUSE);
     });
 });
+
+describe('Flush', () => {
+    const FLUSH = handEvaluator.getEvaluation("FLUSH");
+
+    it('should evaluate correctly FLUSH of CLUB', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getFlash_Hand_OfType("CLUB"));
+        expect(e).toBe(FLUSH);
+    });
+
+    it('should evaluate correctly FLUSH of HEART', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getFlash_Hand_OfType("HEART"));
+        expect(e).toBe(FLUSH);
+    });
+
+    it('should evaluate correctly FLUSH of HEART', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getFlash_Hand_OfType("SPADE"));
+        expect(e).toBe(FLUSH);
+    });
+
+    it('should evaluate correctly FLUSH of HEART', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.getFlash_Hand_OfType("DIAMOND"));
+        expect(e).toBe(FLUSH);
+    });
+});
+
+describe('Straight', () => {
+    const STRAIGHT = handEvaluator.getEvaluation("STRAIGHT");
+
+    it('should evaluate correctly a straight', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_StraightHand());
+        expect(e).toBe(STRAIGHT);
+    });
+});

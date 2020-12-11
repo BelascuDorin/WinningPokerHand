@@ -13,7 +13,6 @@ module.exports.getValid_HandOfCards =  function getValid_HandOfCards() {
         ]
     };
 }
-
 module.exports.getRoyalFlash_Hand_OfType = function getRoyalFlash_Hand_OfType(type){
     return {
         cards: [
@@ -27,7 +26,6 @@ module.exports.getRoyalFlash_Hand_OfType = function getRoyalFlash_Hand_OfType(ty
         ]
     };
 }
-
 module.exports.getStraightFlash_Hand_OfType = function getStraightFlash_Hand_OfType(type){
     return {
         cards: [
@@ -41,7 +39,6 @@ module.exports.getStraightFlash_Hand_OfType = function getStraightFlash_Hand_OfT
         ]
     };
 }
-
 module.exports.getFlash_Hand_OfType = function getFlash_Hand_OfType(type){
     return {
         cards: [
@@ -51,11 +48,10 @@ module.exports.getFlash_Hand_OfType = function getFlash_Hand_OfType(type){
             Card.createCard("A", type),
             Card.createCard("5", type),
             Card.createCard("K", type),
-            Card.createCard("K", "SPADE"),
+            Card.createCard("7", "SPADE"),
         ]
     };
 }
-
 module.exports.get_A2345_StraightFlash_Hand_OfType = function get_A2345_StraightFlash_Hand_OfType(type){
     return {
         cards: [
@@ -69,8 +65,6 @@ module.exports.get_A2345_StraightFlash_Hand_OfType = function get_A2345_Straight
         ]
     };
 }
-
-
 module.exports.get_FourOfAKind_OfNumber = function get_FourOfAKind_OfNumber(number){
     return {
         cards: [
@@ -84,7 +78,6 @@ module.exports.get_FourOfAKind_OfNumber = function get_FourOfAKind_OfNumber(numb
         ]
     };
 }
-
 module.exports.get_ThreeOfAKind_OfNumber = function get_ThreeOfAKind_OfNumber(number){
     return {
         cards: [
@@ -98,7 +91,6 @@ module.exports.get_ThreeOfAKind_OfNumber = function get_ThreeOfAKind_OfNumber(nu
         ]
     };
 }
-
 module.exports.get_FullHouse = function get_FullHouse(){
     return {
         cards: [
@@ -108,6 +100,20 @@ module.exports.get_FullHouse = function get_FullHouse(){
             Card.createCard("5", "CLUB"),
             Card.createCard("2", "DIAMOND"),
             Card.createCard("7", "HEART"),
+            Card.createCard("7", "SPADE"),
+
+        ]
+    };
+}
+module.exports.get_StraightHand = function get_StraightHand(){
+    return {
+        cards: [
+            Card.createCard("2", "CLUB"),
+            Card.createCard("3", "DIAMOND"),
+            Card.createCard("6", "SPADE"),
+            Card.createCard("5", "CLUB"),
+            Card.createCard("2", "DIAMOND"),
+            Card.createCard("4", "HEART"),
             Card.createCard("7", "SPADE"),
 
         ]

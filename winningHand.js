@@ -1,6 +1,7 @@
 const findDuplicates = require('array-find-duplicates');
 const Card = require('./Card');
 const handEvaluator = require('./HandEvaluationScale');
+const cardTypes = Card.cardTypes;
 
 function thereAreDuplicatedCards(cards){
     const result = findDuplicates(cards, (a, b) => a.number === b.number && a.type === b.type);
@@ -82,7 +83,8 @@ function isA_Straight_butNot_A2345(apparition){
 
 function isA_Straight(cards){
     apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    cards.forEach(n => apparition[n]++);
+    onlyNumbers = cards.map(card => card.number.value);
+    onlyNumbers.forEach(n => apparition[n]++);
 
     if(isA_A2345_Straight(apparition)) return true;
     else{
@@ -92,23 +94,21 @@ function isA_Straight(cards){
 }
 
 function isA_StraightFlash_OfType(type, cards){
-    const flushOnly = cards.filter(card => card.type.key === type).map(card => card.number.value);
+    const flushOnly = cards.filter(card => card.type.key === type);
     if(flushOnly.length < 5) return false;
 
     if(isA_Straight(flushOnly)) return true;
     else return false;
 }
 
-function itsA_Club_StraightFlash(cards){
-    if(isA_StraightFlash_OfType("CLUB", cards)    || 
-       isA_StraightFlash_OfType("DIAMOND", cards) ||
-       isA_StraightFlash_OfType("SPADE", cards)   ||
-       isA_StraightFlash_OfType("HEART", cards))
-    {
-        return 1;
-    }
-        
-    return 0;
+function itsA_StraightFlash(cards){
+    isA_StraightFlush = false;
+    cardTypes.enums.forEach(type => {
+        if(isA_StraightFlash_OfType(type.key, cards)){
+            isA_StraightFlush = true;
+        }
+    })
+    return isA_StraightFlush;
 };
 
 function itsA_FourOfAKind(cards){
@@ -130,7 +130,7 @@ function itsA_FullHouse(cards){
 
     apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     cardsNumbers.forEach(n => apparition[n]++);
-    
+
     is_a_3 = false;
     is_a_2 = false;
     apparition.forEach(a => {
@@ -142,6 +142,28 @@ function itsA_FullHouse(cards){
     else return false;
 }
 
+function isAFlash(cards){
+    isA_Flush = false;
+    cardTypes.enums.forEach(type => {
+        if(isAFlash_OfType(type.key, cards)){
+            isA_Flush = true;
+        }
+    })
+    return isA_Flush;
+}
+
+function isA_RoyalFlash(cards){
+    if(hasAllRoyalCards_OfType("CLUB", cards)    ||
+       hasAllRoyalCards_OfType("DIAMOND", cards) ||
+       hasAllRoyalCards_OfType("SPADE", cards)   ||
+       hasAllRoyalCards_OfType("HEART", cards) )
+    {
+        return true;
+    }
+    return false;
+}
+
+
 module.exports.evaluate7CardsPokerHand = function(pokerHand){
     
     if(pokerHand.cards.length !== 7 ){
@@ -152,29 +174,12 @@ module.exports.evaluate7CardsPokerHand = function(pokerHand){
         throw new Error('Invalid Hand. There are at least 2 duplicated cards.');
     }
 
-    orderedHand = pokerHand.cards.sort( (a, b) => {
-        return (a.number.value < b.number.value) ? -1 : 1;
-    });
-
-    if( hasAllRoyalCards_OfType("CLUB", pokerHand.cards)    ||
-        hasAllRoyalCards_OfType("DIAMOND", pokerHand.cards) ||
-        hasAllRoyalCards_OfType("SPADE", pokerHand.cards)   ||
-        hasAllRoyalCards_OfType("HEART", pokerHand.cards) 
-      ){
-        return handEvaluator.getEvaluation("ROYAL_FLASH");
-    }
-
-    if(itsA_Club_StraightFlash(pokerHand.cards)){
-        return handEvaluator.getEvaluation("STRAIGHT_FLUSH");
-    }
-
-    if(itsA_FourOfAKind(pokerHand.cards)){
-        return handEvaluator.getEvaluation("FOUR_OF_A_KIND");
-    }
-
-    if(itsA_FullHouse(pokerHand.cards)){
-        return handEvaluator.getEvaluation("FULL_HOUSE");
-    }
+    if(isA_RoyalFlash(pokerHand.cards))     return handEvaluator.getEvaluation("ROYAL_FLASH");
+    if(itsA_StraightFlash(pokerHand.cards)) return handEvaluator.getEvaluation("STRAIGHT_FLUSH")
+    if(itsA_FourOfAKind(pokerHand.cards))   return handEvaluator.getEvaluation("FOUR_OF_A_KIND");
+    if(itsA_FullHouse(pokerHand.cards))     return handEvaluator.getEvaluation("FULL_HOUSE");  
+    if(isAFlash(pokerHand.cards))           return handEvaluator.getEvaluation("FLUSH");
+    if(isA_Straight(pokerHand.cards))       return handEvaluator.getEvaluation("STRAIGHT");
     
     return 100;
 };
