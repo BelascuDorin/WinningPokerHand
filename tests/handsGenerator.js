@@ -12,7 +12,7 @@ module.exports.getValid_HandOfCards =  function getValid_HandOfCards() {
             Card.createCard("4", "SPADE"),
         ]
     };
-}
+};
 module.exports.getRoyalFlash_Hand_OfType = function getRoyalFlash_Hand_OfType(type){
     return {
         cards: [
@@ -25,7 +25,7 @@ module.exports.getRoyalFlash_Hand_OfType = function getRoyalFlash_Hand_OfType(ty
             Card.createCard("K", type),
         ]
     };
-}
+};
 module.exports.getStraightFlash_Hand_OfType = function getStraightFlash_Hand_OfType(type){
     return {
         cards: [
@@ -38,7 +38,7 @@ module.exports.getStraightFlash_Hand_OfType = function getStraightFlash_Hand_OfT
             Card.createCard("6", type),
         ]
     };
-}
+};
 module.exports.getFlash_Hand_OfType = function getFlash_Hand_OfType(type){
     return {
         cards: [
@@ -51,7 +51,7 @@ module.exports.getFlash_Hand_OfType = function getFlash_Hand_OfType(type){
             Card.createCard("7", "SPADE"),
         ]
     };
-}
+};
 module.exports.get_A2345_StraightFlash_Hand_OfType = function get_A2345_StraightFlash_Hand_OfType(type){
     return {
         cards: [
@@ -64,7 +64,7 @@ module.exports.get_A2345_StraightFlash_Hand_OfType = function get_A2345_Straight
             Card.createCard("K", "SPADE"),
         ]
     };
-}
+};
 module.exports.get_FourOfAKind_OfNumber = function get_FourOfAKind_OfNumber(number){
     return {
         cards: [
@@ -77,7 +77,7 @@ module.exports.get_FourOfAKind_OfNumber = function get_FourOfAKind_OfNumber(numb
             Card.createCard("K", "SPADE"),
         ]
     };
-}
+};
 module.exports.get_ThreeOfAType_OfNumber = function get_ThreeOfAType_OfNumber(number){
     return {
         cards: [
@@ -90,7 +90,7 @@ module.exports.get_ThreeOfAType_OfNumber = function get_ThreeOfAType_OfNumber(nu
             Card.createCard("K", "SPADE"),
         ]
     };
-}
+};
 module.exports.get_FullHouse = function get_FullHouse(){
     return {
         cards: [
@@ -104,7 +104,7 @@ module.exports.get_FullHouse = function get_FullHouse(){
 
         ]
     };
-}
+};
 module.exports.get_StraightHand = function get_StraightHand(){
     return {
         cards: [
@@ -118,4 +118,49 @@ module.exports.get_StraightHand = function get_StraightHand(){
 
         ]
     };
-}
+};
+
+module.exports.get_TwoPair_Of = function get_TwoPair_Of(n1, n2){
+    return {
+        cards: [
+            Card.createCard(n1, "CLUB"),
+            Card.createCard(n2, "DIAMOND"),
+            Card.createCard("6", "SPADE"),
+            Card.createCard(n1, "HEART"),
+            Card.createCard("2", "DIAMOND"),
+            Card.createCard(n2, "HEART"),
+            Card.createCard("7", "SPADE"),
+
+        ]
+    };
+};
+    
+module.exports.get_OnePair_Of = function get_OnePair_Of(n1){
+    return {
+        cards: [
+            Card.createCard(n1, "CLUB"),
+            Card.createCard(n1, "DIAMOND"),
+            Card.createCard("6", "SPADE"),
+            Card.createCard("4", "HEART"),
+            Card.createCard("2", "DIAMOND"),
+            Card.createCard("9", "HEART"),
+            Card.createCard("7", "SPADE"),
+
+        ]
+    };
+};
+
+module.exports.get_HighCard_Hand = function get_HighCard_Hand(){
+    return {
+        cards: [
+            Card.createCard("A", "CLUB"),
+            Card.createCard("K", "DIAMOND"),
+            Card.createCard("6", "SPADE"),
+            Card.createCard("4", "HEART"),
+            Card.createCard("2", "DIAMOND"),
+            Card.createCard("9", "HEART"),
+            Card.createCard("7", "SPADE"),
+
+        ]
+    };
+};

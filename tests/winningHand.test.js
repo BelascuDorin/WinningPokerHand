@@ -163,3 +163,30 @@ describe('Three of a kind', () => {
         expect(e).toBe(THREE_OF_A_KIND);
     });
 });
+
+describe('TWO_PAIR', () => {
+    const TWO_PAIR = handEvaluator.getEvaluation("TWO_PAIR");
+    
+    it('should evaluate correctly a two pair hand', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_TwoPair_Of("3", "A"));       
+        expect(e).toBe(TWO_PAIR);
+    });
+});
+
+describe('PAIR', () => {
+    const PAIR = handEvaluator.getEvaluation("PAIR");
+    
+    it('should evaluate correctly a one pair hand', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_OnePair_Of("3"));       
+        expect(e).toBe(PAIR);
+    });
+});
+
+describe('HIGH_CARD', () => {
+    const HIGH_CARD = handEvaluator.getEvaluation("HIGH_CARD");
+    
+    it('should evaluate correctly a one pair hand', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_HighCard_Hand());       
+        expect(e).toBe(HIGH_CARD);
+    });
+});
