@@ -113,26 +113,13 @@ function itsA_StraightFlash(cards){
 };
 
 function itsA_FourOfAKind(cards){
-    cardsNumbers = cards.map(card => card.number.value);
-
-    apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    cardsNumbers.forEach(n => apparition[n]++);
-
-    is = false;
-    apparition.forEach(a => {
-        if(a === 4) is = true;
-    })
-
-    return is;
+    apparition = getNumbersApparition(cards);
+    return has_n_OfTheSameNumber(4, apparition);
 }
 
 function itsA_FullHouse(cards){
-    cardsNumbers = cards.map(card => card.number.value);
-
-    apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    cardsNumbers.forEach(n => apparition[n]++);
-
-    if(has_3_OfTheSameNumber(apparition) && has_2_OfTheSameNumber(apparition)) return true;
+    apparition = getNumbersApparition(cards);
+    if(has_n_OfTheSameNumber(2, apparition) && has_n_OfTheSameNumber(3, apparition)) return true;
     else return false;
 }
 
@@ -157,29 +144,26 @@ function isA_RoyalFlash(cards){
     return false;
 }
 
-function has_2_OfTheSameNumber(apparition){
-    has = false
-    apparition.forEach(a => {
-        if(a === 2) has = true;
-    })
-    return has;
-}
-
-function has_3_OfTheSameNumber(apparition){
-    has = false;
-    apparition.forEach(a => {
-        if(a === 3) has = true;
-    })
-    return has;
-}
-
-function isA_ThreeOfAKind(cards){
+function getNumbersApparition(cards){
     cardsNumbers = cards.map(card => card.number.value);
 
     apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     cardsNumbers.forEach(n => apparition[n]++);
 
-    return has_3_OfTheSameNumber(apparition);
+    return apparition;
+}
+
+function has_n_OfTheSameNumber(n, apparition){
+    has = false;
+    apparition.forEach(a => {
+        if(a === n) has = true;
+    })
+    return has;
+}
+
+function isA_ThreeOfAKind(cards){
+    apparition = getNumbersApparition(cards);
+    return has_n_OfTheSameNumber(3, apparition);
 }   
 
 module.exports.evaluate7CardsPokerHand = function(pokerHand){
