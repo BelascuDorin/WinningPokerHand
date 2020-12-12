@@ -132,14 +132,7 @@ function itsA_FullHouse(cards){
     apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     cardsNumbers.forEach(n => apparition[n]++);
 
-    is_a_3 = false;
-    is_a_2 = false;
-    apparition.forEach(a => {
-        if(a === 3) is_a_3 = true;
-        if(a === 2) is_a_2 = true;
-    })
-
-    if(is_a_3 && is_a_2) return true;
+    if(has_3_OfTheSameNumber(apparition) && has_2_OfTheSameNumber(apparition)) return true;
     else return false;
 }
 
@@ -164,6 +157,21 @@ function isA_RoyalFlash(cards){
     return false;
 }
 
+function has_2_OfTheSameNumber(apparition){
+    has = false
+    apparition.forEach(a => {
+        if(a === 2) has = true;
+    })
+    return has;
+}
+
+function has_3_OfTheSameNumber(apparition){
+    has = false;
+    apparition.forEach(a => {
+        if(a === 3) has = true;
+    })
+    return has;
+}
 
 function isA_ThreeOfAKind(cards){
     cardsNumbers = cards.map(card => card.number.value);
@@ -171,14 +179,8 @@ function isA_ThreeOfAKind(cards){
     apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     cardsNumbers.forEach(n => apparition[n]++);
 
-    is_a_3 = false;
-
-    apparition.forEach(a => {
-        if(a === 3) is_a_3 = true;
-    })
-
-    return is_a_3; 
-}
+    return has_3_OfTheSameNumber(apparition);
+}   
 
 module.exports.evaluate7CardsPokerHand = function(pokerHand){
     
