@@ -73,11 +73,12 @@ function isA_Straight_butNot_A2345(apparition){
         }
         else{
             if(current > max) max = current;
+            current = 0;
         }
         i++;
     }
 
-    if(max >= 5) return true;    
+    if(max >= 5)return true;   
     else return false;
 }
 
@@ -164,6 +165,21 @@ function isA_RoyalFlash(cards){
 }
 
 
+function isA_ThreeOfAKind(cards){
+    cardsNumbers = cards.map(card => card.number.value);
+
+    apparition = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    cardsNumbers.forEach(n => apparition[n]++);
+
+    is_a_3 = false;
+
+    apparition.forEach(a => {
+        if(a === 3) is_a_3 = true;
+    })
+
+    return is_a_3; 
+}
+
 module.exports.evaluate7CardsPokerHand = function(pokerHand){
     
     if(pokerHand.cards.length !== 7 ){
@@ -180,6 +196,7 @@ module.exports.evaluate7CardsPokerHand = function(pokerHand){
     if(itsA_FullHouse(pokerHand.cards))     return handEvaluator.getEvaluation("FULL_HOUSE");  
     if(isAFlash(pokerHand.cards))           return handEvaluator.getEvaluation("FLUSH");
     if(isA_Straight(pokerHand.cards))       return handEvaluator.getEvaluation("STRAIGHT");
+    if(isA_ThreeOfAKind(pokerHand.cards))   return handEvaluator.getEvaluation("THREE_OF_A_KIND");
     
     return 100;
 };

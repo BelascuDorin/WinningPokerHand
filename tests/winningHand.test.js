@@ -108,7 +108,7 @@ describe('Four of a kind', () => {
 
 
     it('should NOT evaluate correctly 3 of 10 as FOUR_OF_A_KIND', () => {
-        const e = winningHand.evaluate7CardsPokerHand(hg.get_ThreeOfAKind_OfNumber("10"));
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_ThreeOfAType_OfNumber("10"));
         expect(e).not.toBe(FOUR_OF_A_KIND);
     });
 });
@@ -152,5 +152,14 @@ describe('Straight', () => {
     it('should evaluate correctly a straight', () => {
         const e = winningHand.evaluate7CardsPokerHand(hg.get_StraightHand());
         expect(e).toBe(STRAIGHT);
+    });
+});
+
+describe('Three of a kind', () => {
+    const THREE_OF_A_KIND = handEvaluator.getEvaluation("THREE_OF_A_KIND");
+    
+    it('should evaluate correctly a three of a kind', () => {
+        const e = winningHand.evaluate7CardsPokerHand(hg.get_ThreeOfAType_OfNumber("3"));       
+        expect(e).toBe(THREE_OF_A_KIND);
     });
 });

@@ -78,7 +78,7 @@ module.exports.get_FourOfAKind_OfNumber = function get_FourOfAKind_OfNumber(numb
         ]
     };
 }
-module.exports.get_ThreeOfAKind_OfNumber = function get_ThreeOfAKind_OfNumber(number){
+module.exports.get_ThreeOfAType_OfNumber = function get_ThreeOfAType_OfNumber(number){
     return {
         cards: [
             Card.createCard(number, "CLUB"),
